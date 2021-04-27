@@ -6,6 +6,6 @@ variable "gcp_region" {
 
 variable "gcp_project" {
   type        = string
-  description = "GCP project name"
+  description = "GCP project ID"
   default     = "doit-ipt-apigee-dev-808d"
 }
