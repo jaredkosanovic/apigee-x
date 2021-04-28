@@ -1,4 +1,4 @@
-resource "google_apigee_organization" "org" {
+resource "google_apigee_organization" "this" {
   analytics_region                     = var.gcp_region
   display_name                         = var.org_name
   project_id                           = var.gcp_project
