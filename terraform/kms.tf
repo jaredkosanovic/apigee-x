@@ -1,7 +1,3 @@
-data "google_project" "this" {
-  project_id = var.gcp_project
-}
-
 resource "google_kms_key_ring" "this" {
   name     = "apigee"
   location = var.gcp_region
