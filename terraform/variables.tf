@@ -21,3 +21,9 @@ variable "org_name" {
   description = "Display name of Apigee organization."
   default     = "Development"
 }
+
+variable "instance_name" {
+  type        = string
+  description = "Display name of Apigee instance."
+  default     = "Development"
+}

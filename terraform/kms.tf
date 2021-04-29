@@ -1,11 +1,11 @@
-resource "google_kms_key_ring" "this" {
-  name     = "apigee"
+resource "google_kms_key_ring" "database" {
+  name     = "apigee-database"
   location = var.gcp_region
 }
 
-resource "google_kms_crypto_key" "this" {
-  name     = "apigee"
-  key_ring = google_kms_key_ring.this.id
+resource "google_kms_crypto_key" "database" {
+  name     = "apigee-database"
+  key_ring = google_kms_key_ring.database.id
   purpose  = "ENCRYPT_DECRYPT"
 
   lifecycle {
@@ -22,8 +22,31 @@ resource "google_project_service_identity" "apigee" {
   service  = google_project_service.apigee.service
 }
 
-resource "google_kms_crypto_key_iam_binding" "this" {
-  crypto_key_id = google_kms_crypto_key.this.id
+resource "google_kms_crypto_key_iam_binding" "database" {
+  crypto_key_id = google_kms_crypto_key.database.id
+  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  members = [
+    "serviceAccount:${google_project_service_identity.apigee.email}",
+  ]
+}
+
+resource "google_kms_key_ring" "disk" {
+  name     = "apigee-disk"
+  location = var.gcp_region
+}
+
+resource "google_kms_crypto_key" "disk" {
+  name     = "apigee-disk"
+  key_ring = google_kms_key_ring.database.id
+  purpose  = "ENCRYPT_DECRYPT"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "google_kms_crypto_key_iam_binding" "disk" {
+  crypto_key_id = google_kms_crypto_key.disk.id
   role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
   members = [
     "serviceAccount:${google_project_service_identity.apigee.email}",
