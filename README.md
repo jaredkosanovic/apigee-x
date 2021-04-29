@@ -25,8 +25,12 @@ gsutil versioning set on gs://apigee-terraform-state
 
 ### Provision GCP Resources with Terraform
 
+Terraform configuration for high-level Apigee resources are stored in a [module](./terraform/modules/apigee-org) to enable reuse and deduplication.
+Each Apigee organization is in a separate directory.
+
+Example steps to provision the development Apigee organization.
 ```bash
-cd terraform
+cd terraform/development
 terraform init
 terraform apply
 ```
