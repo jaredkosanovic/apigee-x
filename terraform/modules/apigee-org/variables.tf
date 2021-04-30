@@ -14,6 +14,6 @@ variable "network_name" {
 }
 
 variable "apigee_display_name" {
-  type = string
+  type        = string
   description = "Human readable name for Apigee orgs and instances."
 }

@@ -17,11 +17,14 @@ This repository is meant for documentation and configuration of UW-Madison's Api
 Terraform state is stored in a Cloud Storage bucket.
 The bucket is created outside of Terraform.
 
+Example for the development project:
 ```bash
 gcloud auth login
-gsutil mb -p $PROJECT_ID -c REGIONAL -l us-central1 -b on gs://apigee-terraform-state
-gsutil versioning set on gs://apigee-terraform-state
+gsutil mb -p $PROJECT_ID -c REGIONAL -l us-central1 -b on gs://apigee-terraform-state-dev
+gsutil versioning set on gs://apigee-terraform-state-dev
 ```
+
+Cloud Storage bucket names are globally unique, so different names will need to be chosen for different GCP projects.
 
 ### Provision GCP Resources with Terraform
 
