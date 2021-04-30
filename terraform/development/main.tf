@@ -34,7 +34,8 @@ resource "google_apigee_instance_attachment" "ipt" {
 resource "google_apigee_envgroup" "doit" {
   name   = "DoIT"
   org_id = module.apigee_org.org_id
-  #TODO: Hostnames
+  #TODO: Use permanant hostname
+  hostnames = ["dev.apigee.wisc.edu"]
 }
 
 resource "google_apigee_envgroup_attachment" "framework" {
